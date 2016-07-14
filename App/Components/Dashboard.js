@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   ActivityIndicatorIOS
 } from 'react-native';
+import Profile from "./Profile";
 
 export default class Dashboard extends React.Component {
   
@@ -16,7 +17,11 @@ export default class Dashboard extends React.Component {
   }
   
   _goToProfile = () => {
-    
+    this.props.navigator.push({
+      component: Profile,
+      title: 'Profile Page',
+      passProps: {userInfo: this.props.userInfo}
+    })
   };
   
   _goToNotes = () => {

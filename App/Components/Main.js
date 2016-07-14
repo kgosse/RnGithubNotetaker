@@ -83,6 +83,7 @@ export default class Main extends React.Component{
             isLoading: false
           })
         } else {
+          console.log(res);
           this.props.navigator.push({
             title: res.name || 'Select an Option',
             component: Dashboard,
