@@ -8,6 +8,7 @@ import {
   ActivityIndicatorIOS
 } from 'react-native';
 import api from '../Utils/api';
+import Dashboard from "./Dashboard";
 
 
 export default class Main extends React.Component{
@@ -39,7 +40,7 @@ export default class Main extends React.Component{
             isLoading: false
           })
         } else {
-/*          this.props.navigator.push({
+          this.props.navigator.push({
             title: res.name || 'Select an Option',
             component: Dashboard,
             passProps: {userInfo: res}
@@ -48,7 +49,7 @@ export default class Main extends React.Component{
             isLoading: false,
             error: false,
             username: ''
-          })*/
+          })
         }
       });
   };
