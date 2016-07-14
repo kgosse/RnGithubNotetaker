@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   View,
   Text,
@@ -8,6 +7,7 @@ import {
   TouchableHighlight,
   ActivityIndicatorIOS
 } from 'react-native';
+import api from '../Utils/api';
 
 
 export default class Main extends React.Component{
@@ -21,17 +21,36 @@ export default class Main extends React.Component{
     };
   }
   
-  _handleChange(event) {
+  _handleChange = (event) => {
     this.setState({
       username: event.nativeEvent.text
     });
-  }
+  };
   
-  _handleSubmit() {
+  _handleSubmit = () => {
     this.setState({
       isLoading: true
     });
-    console.log('SUBMIT ', this.state.username);
+    api.getBio(this.state.username)
+      .then((res) => {
+        if(res.message === 'Not Found') {
+          this.setState({
+            error: 'User not found',
+            isLoading: false
+          })
+        } else {
+/*          this.props.navigator.push({
+            title: res.name || 'Select an Option',
+            component: Dashboard,
+            passProps: {userInfo: res}
+          });
+          this.setState({
+            isLoading: false,
+            error: false,
+            username: ''
+          })*/
+        }
+      });
   };
   
   render() {
@@ -41,11 +60,11 @@ export default class Main extends React.Component{
         <TextInput
           style={styles.searchInput}
           value={this.state.username}
-          onChange={this._handleChange.bind(this)}
+          onChange={this._handleChange}
         />
         <TouchableHighlight
           style={styles.button}
-          onPress={this._handleSubmit.bind(this)}
+          onPress={this._handleSubmit}
           underlayColor="white"
         >
           <Text style={styles.buttonText}> Search </Text>
