@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Image,
   TextInput,
   StyleSheet,
   TouchableHighlight,
@@ -14,12 +15,66 @@ export default class Dashboard extends React.Component {
     super(props);
   }
   
+  _goToProfile = () => {
+    
+  };
+  
+  _goToNotes = () => {
+    
+  };
+  
+  _goToRepos = () => {
+    
+  };
+  
+  makeBackground(btn) {
+    const obj = {
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+      flex: 1
+    };
+    
+    if (btn === 0) {
+      obj.backgroundColor = '#48BBEC';
+    } else if (btn === 1) {
+      obj.backgroundColor = '#E77AAE';
+    } else {
+      obj.backgroundColor = '#758BF4';
+    }
+    
+    return obj;
+  }
+  
+  
   render() {
-    console.log('PROPS ', this.props);
+    
     return (
       <View style={styles.container}>
-        <Text>This is the dashboard</Text>
-        <Text>{JSON.stringify(this.props.userInfo)}</Text>
+        
+        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />
+        
+        <TouchableHighlight
+          style={this.makeBackground(0)}
+          onPress={this._goToProfile}
+          underlayColor="#88D4F5">
+          <Text style={styles.buttonText}> View Profile </Text>
+        </TouchableHighlight>
+        
+        <TouchableHighlight
+          style={this.makeBackground(1)}
+          onPress={this._goToRepos}
+          underlayColor="#88D4F5">
+          <Text style={styles.buttonText}> View Repos </Text>
+        </TouchableHighlight>
+        
+        <TouchableHighlight
+          style={this.makeBackground(2)}
+          onPress={this._goToNotes}
+          underlayColor="#88D4F5">
+          <Text style={styles.buttonText}> View Notes </Text>
+        </TouchableHighlight>
+      
       </View>
     )
   }
