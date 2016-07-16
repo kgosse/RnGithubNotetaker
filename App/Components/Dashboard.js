@@ -9,6 +9,8 @@ import {
   ActivityIndicatorIOS
 } from 'react-native';
 import Profile from "./Profile";
+import Repositories from './Repositories';
+import api from '../Utils/api';
 
 export default class Dashboard extends React.Component {
   
@@ -29,7 +31,17 @@ export default class Dashboard extends React.Component {
   };
   
   _goToRepos = () => {
-    
+    api.getRepos(this.props.userInfo.login)
+      .then((res) => {
+        this.props.navigator.push({
+          component: Repositories,
+          title: 'Repos Page',
+          passProps: {
+            userInfo: this.props.userInfo,
+            repos: res
+          }
+        });
+      });
   };
   
   makeBackground(btn) {
