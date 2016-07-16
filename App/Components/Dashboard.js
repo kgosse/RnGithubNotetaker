@@ -16,6 +16,10 @@ export default class Dashboard extends React.Component {
   
   constructor(props) {
     super(props);
+    
+    this.state = {
+      isLoading: false
+    };
   }
   
   _goToProfile = () => {
@@ -31,8 +35,14 @@ export default class Dashboard extends React.Component {
   };
   
   _goToRepos = () => {
+    this.setState({
+      isLoading: true
+    });
     api.getRepos(this.props.userInfo.login)
       .then((res) => {
+        this.setState({
+          isLoading: false
+        });
         this.props.navigator.push({
           component: Repositories,
           title: 'Repos Page',
@@ -65,6 +75,7 @@ export default class Dashboard extends React.Component {
   
   
   render() {
+    // const spinner = this.state.isLoading ? (<ActivityIndicatorIOS animating={true} color="#111" size="large" hidesWhenStopped={true}/>) : (<View></View>);
     
     return (
       <View style={styles.container}>
@@ -82,7 +93,9 @@ export default class Dashboard extends React.Component {
           style={this.makeBackground(1)}
           onPress={this._goToRepos}
           underlayColor="#88D4F5">
-          <Text style={styles.buttonText}> View Repos </Text>
+            <Text style={styles.buttonText}>
+              View Repos
+            </Text>
         </TouchableHighlight>
         
         <TouchableHighlight
@@ -91,7 +104,6 @@ export default class Dashboard extends React.Component {
           underlayColor="#88D4F5">
           <Text style={styles.buttonText}> View Notes </Text>
         </TouchableHighlight>
-      
       </View>
     )
   }
@@ -100,7 +112,8 @@ export default class Dashboard extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 65,
-    flex: 1
+    flex: 1,
+    justifyContent: 'center'
   },
   image: {
     height: 350
