@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   View,
   Text,
@@ -8,6 +7,10 @@ import {
   StyleSheet,
   TouchableHighlight
 } from 'react-native';
+import Badge from './Badge';
+import api from '../Utils/api';
+import Separator from './Helpers/Separator';
+
 
 const styles = StyleSheet.create({
   container: {

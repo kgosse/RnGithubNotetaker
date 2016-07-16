@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
 export default class Main extends React.Component{
   
   constructor(props) {
